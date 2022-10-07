@@ -1,0 +1,62 @@
+body{
+	background: rgb(5,0,108);
+	background: linear-gradient(90deg, rgba(5,0,108,1) 0%, rgba(0,30,219,1) 100%);
+}
+
+/*Pàgina Login*/
+
+.card{
+	background-color: initial;
+    border: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-body{
+	text-align: center;
+	justify-content: center;
+	color: white;
+}
+
+.login-title{
+	text-align: center;
+	margin-bottom: 5%;
+}
+
+.login, .password{
+	min-width: 200px;
+	text-align: center;
+}
+
+/*Home*/
+
+.box{
+	background-color: white;
+    padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    min-width: 80%;
+    max-width: 1200px;
+    min-height: 80%;
+    margin: auto;
+    padding-top: 65px;
+    padding-bottom: 85px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
+}
+
+.tabela {
+	widows: 100%;
+  	display: grid;
+  	justify-content: center;
+  	align-content: center;
+  	align-items: center;
+  	justify-items: start;
+
+}
+
+
