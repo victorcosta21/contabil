@@ -8,6 +8,9 @@ class RegisterClient extends Controller
 {
     public function index()
     {
-        return view('register.index');
+        $count = 1;
+        // echo '<pre>';print_r($count);exit;
+
+        return view('register.index', compact('count'));
     }
 }

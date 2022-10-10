@@ -26,12 +26,25 @@
 					<input type="date" name="date" class="form-control" required>
 				</div>
 			</div><br>
-			<div class="row">
 				<div id="moreCtt">
 					<button type="button" class="btn btn-success fa fa-plus" onclick="moreCtt()"></button>
 					<button type="button" class="btn btn-danger fa fa-minus" onclick="downCtt()"></button>
+					<div id="formCtt1" class="form-group row">
+						<div class="form-group col-md-3" id="cttName">
+							<label>Nome do Contato 1</label>
+							<input type="text" name="contactName[1]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" required>
+						</div>
+						<div class="form-group col-md-2" id="cttCel">
+							<label>Celular 1</label>
+							<input type="text" name="cttCel[1]" class="form-control" placeholder="(00)00000-0000" required>
+						</div>
+						<div class="form-group col-md-5" id="cttDesc">
+							<label>Descrição 1</label>
+							<input type="text" name="cttDesc[1]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50">
+						</div>
+					</div>
 				</div>
-			</div><br><br>
+				<input type="hidden" id="last" value="2"><br><br>
 
 			<h4 style="text-align:center;">Dados referente ao local de instação</h4><br>
 
@@ -65,9 +78,169 @@
 				</div>
 			</div><br><br>
 
+			<h4 style="text-align:center;">Controle de Pagamento</h4><br>
+
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Janeiro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Fevereiro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Março</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Abril</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Maio</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Junho</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			</div><br>
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Julho</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Agosto</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Setembro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Outubro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Novembro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado">Dezembro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			</div><br><br>
+
 			<h4 style="text-align:center;">Informações extras</h4><br>
 
+			<div class="row">
+				<div class="form-group">
+					<label>Escreva algumas informações adicionais caso queira</label>
+				    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+			  	</div>
+			</div>
 		</form>
 	</div>
 </div>
 @endsection
+
+<script type="text/javascript">
+function moreCtt() {
+	var last = $('#last').val();
+	var div = [];
+	div.push('<div id="formCtt' + last + '" class="form-group row" style="margin-top:15px;">');
+	div.push('<div class="form-group col-md-3" id="cttName' + last + '">');
+	div.push('<label>Nome do Contato ' + last + '</label>');
+	div.push('<input type="text" name="contactName[' + last + ']" class="form-control" placeholder="Nome e sobrenome" maxlength="20">');
+	div.push('</div>');
+	div.push('<div class="form-group col-md-2" id="cttCel' + last + '">');
+	div.push('<label>Celular ' + last + '</label>');
+	div.push('<input type="text" name="cttCel[' + last + ']" class="form-control" placeholder="(00)00000-0000">');
+	div.push('</div>');
+	div.push('<div class="form-group col-md-5" id="cttDesc' + last + '">');
+	div.push('<label>Descrição ' + last + ' </label>');
+	div.push('<input type="text" name="cttDesc[' + last + ']" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50">');
+	div.push('</div>');
+	div.push('</div>');
+	div = div.join('');
+	$("#moreCtt").append(div);
+	$("#last").val(parseInt(last) + 1);
+};
+
+
+function downCtt() {
+	var last = $("#last").val();
+	if(last > 2) {
+		last = last-1;
+	}
+	var id = 'formCtt' + last;
+	console.log(id);
+	if(last > 1) {
+		$("div").remove('#' + id);
+		$("#last").val(parseInt(last));
+	}
+};
+
+</script>

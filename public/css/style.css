@@ -3,6 +3,22 @@ body{
 	background: linear-gradient(90deg, rgba(5,0,108,1) 0%, rgba(0,30,219,1) 100%);
 }
 
+.box{
+	background-color: white;
+    padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    min-width: 80%;
+    max-width: 1200px;
+    min-height: 80%;
+    margin: auto;
+    padding-top: 65px;
+    padding-bottom: 85px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
+}
+
 /*Pàgina Login*/
 
 .card{
@@ -33,21 +49,6 @@ body{
 
 /*Home*/
 
-.box{
-	background-color: white;
-    padding: 20px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    min-width: 80%;
-    max-width: 1200px;
-    min-height: 80%;
-    margin: auto;
-    padding-top: 65px;
-    padding-bottom: 85px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
-}
 
 .tabela {
 	widows: 100%;
