@@ -82,63 +82,31 @@
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Janeiro</label>
+			      <label for="inputEstado" style="font-weight:bolder">Janeiro</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
-			    </div>
-			    <div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Fevereiro</label>
-			      <select id="inputEstado" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Março</label>
-			      <select id="inputEstado" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Abril</label>
-			      <select id="inputEstado" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Maio</label>
-			      <select id="inputEstado" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Junho</label>
-			      <select id="inputEstado" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
+			    </div><br>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
 			</div><br>
+
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Julho</label>
+			      <label for="inputEstado" style="font-weight:bolder">Fevereiro</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -146,8 +114,23 @@
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
 			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Agosto</label>
+			      <label for="inputEstado" style="font-weight:bolder">Março</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -155,8 +138,23 @@
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
 			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Setembro</label>
+			      <label for="inputEstado" style="font-weight:bolder">Abril</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -164,8 +162,23 @@
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
 			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Outubro</label>
+			      <label for="inputEstado" style="font-weight:bolder">Maio</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -173,8 +186,23 @@
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
 			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Novembro</label>
+			      <label for="inputEstado" style="font-weight:bolder">Junho</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -182,8 +210,23 @@
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
 			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado">Dezembro</label>
+			      <label for="inputEstado" style="font-weight:bolder">Julho</label>
 			      <select id="inputEstado" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -191,15 +234,152 @@
 			        <option value="4">Pago via Cartão Créd</option>
 			      </select>
 			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado" style="font-weight:bolder">Agosto</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado" style="font-weight:bolder">Setembro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado" style="font-weight:bolder">Outubro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado" style="font-weight:bolder">Novembro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="form-group col-md-2" style="text-align:center;">
+			      <label for="inputEstado" style="font-weight:bolder">Dezembro</label>
+			      <select id="inputEstado" class="form-control">
+			        <option selected value="1">Pendente</option>
+			        <option value="2">Pago via Pix</option>
+			        <option value="3">Pago via Boleto</option>
+			        <option value="4">Pago via Cartão Créd</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2">
+			    	<label>Data de Vencimento</label>
+			    	<input type="date" name="dueDate" class="form-control">
+				</div>
+				<div class="form-group col-md-2">
+			    	<label>Previsão de Pagamento</label>
+			    	<input type="date" name="cpPrevision" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label>Anotações referente ao pagamento</label>
+					<input type="text" name="comments" class="form-control" maxlength="40">
+				</div>
 			</div><br><br>
 
 			<h4 style="text-align:center;">Informações extras</h4><br>
 
 			<div class="row">
 				<div class="form-group">
-					<label>Escreva algumas informações adicionais caso queira</label>
-				    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<label>Escreva algumas informações adicionais caso queira :</label>
+				    <textarea class="form-control mt-1" id="informations" rows="3"></textarea>
 			  	</div>
+			</div>
+			<div class="row justify-content-md-end">
+				<div class="form-group col-md-2 mt-4">
+					<button type="submit" class="btn btn-primary">Cadastrar</button>
+				</div>
 			</div>
 		</form>
 	</div>
