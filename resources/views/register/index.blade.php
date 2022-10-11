@@ -9,6 +9,10 @@
 
 		<form class="form-group">
 			<div class="row">
+				<div class="form-group col-md-1">
+					<label>Nº Conta</label>
+					<input type="text" name="register" class="form-control" maxlength="3" placeholder="000" required>
+				</div>
 				<div class="form-group col-md-4">
 					<label>Nome</label>
 					<input type="text" name="name" class="form-control" maxlength="40" placeholder="Digite o nome e sobrenome do cliente" required>
@@ -17,9 +21,9 @@
 					<label>Documento</label>
 					<input type="text" name="document" class="form-control" maxlength="20" placeholder="RG, CPF ou CNPJ" required>
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
 					<label>E-mail</label>
-					<input type="text" name="email" class="form-control" maxlength="40" placeholder="email@email.com" required>
+					<input type="text" name="email" class="form-control" maxlength="35" placeholder="email@email.com" required>
 				</div>
 				<div class="form-group col-md-2">
 					<label>Cliente desde:</label>
@@ -373,7 +377,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label>Escreva algumas informações adicionais caso queira :</label>
-				    <textarea class="form-control mt-1" id="informations" rows="3"></textarea>
+				    <textarea class="form-control mt-1" id="informations" rows="3" maxlength="250"></textarea>
 			  	</div>
 			</div>
 			<div class="row justify-content-md-end">
