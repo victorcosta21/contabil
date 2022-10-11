@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegisterClientsTable extends Migration
+class CreatePaymentControlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateRegisterClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('register_clients', function (Blueprint $table) {
+        Schema::create('payment_controls', function (Blueprint $table) {
             $table->id();
-            $table->number('accountNumber')->unique();
-            $table->string('name');
-            $table->string('document');
-            $table->string('email');
-            $table->string('date');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateRegisterClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('register_clients');
+        Schema::dropIfExists('payment_controls');
     }
 }
