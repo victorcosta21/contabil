@@ -6,28 +6,30 @@
 	<div class="box-content">
 
 		<h4 style="text-align:center;">Dados referente ao cliente</h4><br>
+		@include('register.alert')
 
-		<form class="form-group">
+		<form class="form-group" action="{{ route('store') }}" method="POST">
+			@csrf
 			<div class="row">
 				<div class="form-group col-md-1">
 					<label>Nº Conta</label>
-					<input type="text" name="register" class="form-control" maxlength="3" placeholder="000" required>
+					<input type="text" name="client[accountNumber]" class="form-control" maxlength="3" placeholder="000" >
 				</div>
 				<div class="form-group col-md-4">
 					<label>Nome</label>
-					<input type="text" name="name" class="form-control" maxlength="40" placeholder="Digite o nome e sobrenome do cliente" required>
+					<input type="text" name="client[name]" class="form-control" maxlength="40" placeholder="Digite o nome e sobrenome do cliente" >
 				</div>
 				<div class="form-group col-md-2">
 					<label>Documento</label>
-					<input type="text" name="document" class="form-control" maxlength="20" placeholder="RG, CPF ou CNPJ" required>
+					<input type="text" name="client[document]" class="form-control" maxlength="20" placeholder="RG, CPF ou CNPJ" >
 				</div>
 				<div class="form-group col-md-3">
 					<label>E-mail</label>
-					<input type="text" name="email" class="form-control" maxlength="35" placeholder="email@email.com" required>
+					<input type="text" name="client[email]" class="form-control" maxlength="35" placeholder="email@email.com" >
 				</div>
 				<div class="form-group col-md-2">
 					<label>Cliente desde:</label>
-					<input type="date" name="date" class="form-control" required>
+					<input type="date" name="client[date]" class="form-control" >
 				</div>
 			</div><br>
 				<div id="moreCtt">
@@ -36,15 +38,15 @@
 					<div id="formCtt1" class="form-group row">
 						<div class="form-group col-md-3" id="cttName">
 							<label>Nome do Contato 1</label>
-							<input type="text" name="contactName[1]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" required>
+							<input type="text" name="contacts[1][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" >
 						</div>
 						<div class="form-group col-md-2" id="cttCel">
 							<label>Celular 1</label>
-							<input type="text" name="cttCel[1]" class="form-control" placeholder="(00)00000-0000" required>
+							<input type="text" name="contacts[1][cttCel]" class="form-control" placeholder="(00)00000-0000" >
 						</div>
 						<div class="form-group col-md-5" id="cttDesc">
 							<label>Descrição 1</label>
-							<input type="text" name="cttDesc[1]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50">
+							<input type="text" name="contacts[1][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50" >
 						</div>
 					</div>
 				</div>
@@ -55,30 +57,30 @@
 			<div class="row">
 				<div class="form-group col-md-1">
 					<label>Ambiente</label>
-					<select class="form-control" name="environment">
+					<select class="form-control" name="address[environment]" >
 						<option value="1">Casa</option>
 						<option value="2">Comércio</option>
 					</select>
 				</div>
 				<div class="form-group col-md-2">
 					<label>CEP</label>
-					<input type="text" name="cep" class="form-control" maxlength="15" placeholder="00000-000" required>
+					<input type="text" name="address[cep]" class="form-control" maxlength="15" placeholder="00000-000" >
 				</div>
 				<div class="form-group col-md-3">
 					<label>Endereço</label>
-					<input type="text" name="address" class="form-control" maxlength="9" placeholder="Ex: Rua Santa Otilia" required>
+					<input type="text" name="address[road]" class="form-control" maxlength="30" placeholder="Ex: Rua Santa Otilia" >
 				</div>
 				<div class="form-group col-md-1">
 					<label>Número</label>
-					<input type="text" name="number" class="form-control" maxlength="5" placeholder="00000" required>					
+					<input type="text" name="address[number]" class="form-control" maxlength="5" placeholder="00000" >					
 				</div>
 				<div class="form-group col-md-2">
 					<label>Complemento</label>
-					<input type="text" name="complement" class="form-control" maxlength="20" placeholder="Casa 1?">
+					<input type="text" name="address[complement]" class="form-control" maxlength="20" placeholder="Casa 1?">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Ponto de Referência</label>
-					<input type="text" name="refer" class="form-control" maxlength="30" placeholder="Ex: Próximo ao mercado nihei">
+					<input type="text" name="address[reference]" class="form-control" maxlength="30" placeholder="Ex: Próximo ao mercado nihei">
 				</div>
 			</div><br><br>
 
@@ -86,8 +88,9 @@
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Janeiro</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Janeiro</label>
+		      	  <input type="hidden" name="month[1][month]" value="january">
+			      <select name="month[1][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -96,22 +99,23 @@
 			    </div><br>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[1][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[1][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[1][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Fevereiro</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Fevereiro</label>
+		      	  <input type="hidden" name="month[2][month]" value="february">
+			      <select name="month[2][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -120,22 +124,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[2][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[2][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[2][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Março</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Março</label>
+		      	  <input type="hidden" name="month[3][month]" value="march">
+			      <select name="month[3][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -144,22 +149,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[3][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[3][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[3][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Abril</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Abril</label>
+		      	  <input type="hidden" name="month[4][month]" value="april">
+			      <select name="month[4][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -168,22 +174,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[4][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[4][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[4][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Maio</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Maio</label>
+		      	  <input type="hidden" name="month[5][month]" value="may">
+			      <select name="month[5][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -192,22 +199,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[5][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[5][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[5][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Junho</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Junho</label>
+		      	  <input type="hidden" name="month[6][month]" value="june">
+			      <select name="month[6][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -216,22 +224,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[6][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[6][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[6][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Julho</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Julho</label>
+		      	  <input type="hidden" name="month[7][month]" value="july">
+			      <select name="month[7][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -240,22 +249,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[7][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[7][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[7][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Agosto</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Agosto</label>
+		      	  <input type="hidden" name="month[8][month]" value="august">
+			      <select name="month[8][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -264,22 +274,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[8][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[8][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[8][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Setembro</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Setembro</label>
+		      	  <input type="hidden" name="month[9][month]" value="september">
+			      <select name="month[9][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -288,22 +299,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[9][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[9][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[9][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Outubro</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Outubro</label>
+		      	  <input type="hidden" name="month[10][month]" value="october">
+			      <select name="month[10][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -312,22 +324,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[10][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[10][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[10][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Novembro</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Novembro</label>
+		      	  <input type="hidden" name="month[11][month]" value="november">
+			      <select name="month[11][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -336,22 +349,23 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[11][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[11][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[11][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br>
 
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="inputEstado" style="font-weight:bolder">Dezembro</label>
-			      <select id="inputEstado" class="form-control">
+			      <label for="month" style="font-weight:bolder">Dezembro</label>
+		      	  <input type="hidden" name="month[12][month]" value="december">
+			      <select name="month[12][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
 			        <option value="3">Pago via Boleto</option>
@@ -360,15 +374,15 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="dueDate" class="form-control">
+			    	<input type="date" name="month[12][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Previsão de Pagamento</label>
-			    	<input type="date" name="cpPrevision" class="form-control">
+			    	<input type="date" name="month[12][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="comments" class="form-control" maxlength="40">
+					<input type="text" name="month[12][comments]" class="form-control" maxlength="40">
 				</div>
 			</div><br><br>
 
@@ -377,7 +391,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label>Escreva algumas informações adicionais caso queira :</label>
-				    <textarea class="form-control mt-1" id="informations" rows="3" maxlength="250"></textarea>
+				    <textarea class="form-control mt-1" name="extra[informations]" rows="3" maxlength="250"></textarea>
 			  	</div>
 			</div>
 			<div class="row justify-content-md-end">
@@ -397,15 +411,15 @@ function moreCtt() {
 	div.push('<div id="formCtt' + last + '" class="form-group row" style="margin-top:15px;">');
 	div.push('<div class="form-group col-md-3" id="cttName' + last + '">');
 	div.push('<label>Nome do Contato ' + last + '</label>');
-	div.push('<input type="text" name="contactName[' + last + ']" class="form-control" placeholder="Nome e sobrenome" maxlength="20">');
+	div.push('<input type="text" name="contacts[' + last + '][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20">');
 	div.push('</div>');
 	div.push('<div class="form-group col-md-2" id="cttCel' + last + '">');
 	div.push('<label>Celular ' + last + '</label>');
-	div.push('<input type="text" name="cttCel[' + last + ']" class="form-control" placeholder="(00)00000-0000">');
+	div.push('<input type="text" name="contacts[' + last + '][cttCel]" class="form-control" placeholder="(00)00000-0000">');
 	div.push('</div>');
 	div.push('<div class="form-group col-md-5" id="cttDesc' + last + '">');
 	div.push('<label>Descrição ' + last + ' </label>');
-	div.push('<input type="text" name="cttDesc[' + last + ']" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50">');
+	div.push('<input type="text" name="contacts[' + last + '][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50">');
 	div.push('</div>');
 	div.push('</div>');
 	div = div.join('');

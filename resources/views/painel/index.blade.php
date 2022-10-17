@@ -7,7 +7,7 @@
 		<div class="actions">
 			<div class="row justify-content-end">
 				<div class="col-sm-3">
-					<a href="{{ route('register') }}" type="button" class="btn btn-primary">Cadastrar novo cliente</a>
+					<a href="{{ route('register-client') }}" type="button" class="btn btn-primary">Cadastrar novo cliente</a>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegisterClientsTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateRegisterClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('register_clients', function (Blueprint $table) {
-            $table->id();
-            $table->number('accountNumber')->unique();
+        Schema::create('clients', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('accountNumber')->unique();
             $table->string('name');
             $table->string('document');
             $table->string('email');

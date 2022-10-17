@@ -14,8 +14,13 @@ class CreateContactsTable extends Migration
     public function up()
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->integer('client_id')->unsigned();
+            $table->string('cttName');
+            $table->string('cttCel');
+            $table->string('cttDesc');
             $table->timestamps();
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 
