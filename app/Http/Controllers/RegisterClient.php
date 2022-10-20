@@ -48,7 +48,6 @@ class RegisterClient extends Controller
                 $ammount = str_replace('.','', $mt['ammount']);
                 $ammount = str_replace(',','.', $ammount);
                 $ammount = (float)$ammount;
-                // echo "<pre>"; print_r(gettype($ammount)); exit;
 
                 $month = PaymentControl::create([
                     'month'         => $mt['month'],
