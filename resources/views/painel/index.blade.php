@@ -11,40 +11,35 @@
 				</div>
 			</div>
 		</div>
-		<table class="table">
+		<table class="table mt-4">
 		  <tr>
-			<th width="5%">#</th>
-			<th width="30%">Nome</th>
-			<th width="25%">Contato Principal</th>
-			<th width="30%">email</th>
-			<th width="10%"></th>
+			<th width="10%">#</th>
+			<th width="25%">Nome</th>
+			<th width="25%">E-mail</th>
+			<th width="20%">Documento</th>
+			<th width="5%">Visualizar</th>
 		  </tr>
+
+	  	@foreach($clients as $key => $client)
+
 		  <tr>
-			<td>1</td>
-			<td>Maria Anders</td>
-			<td>(11)9999-9999</td>
-			<td>email@email.com</td>
-			<td>VISUALIZAR</td>
+			<td>{{ $client->accountNumber }}</td>
+			<td>{{ $client->name }}</td>
+			<td>{{ $client->email }}</td>
+			<td>{{ $client->document }}</td>
+			<td>
+				<button class="fa fa-address-card-o modalBtn" data-bs-toggle="modal" data-bs-target="#datailModal{{ $client->accountNumber }}" ></button>
+				</td>
 		  </tr>
-		  <tr>
-			<td>2</td>
-			<td>Francisco Chang</td>
-			<td>(11)9999-9999</td>
-			<td>email@email.com</td>
-			<td>VISUALIZAR</td>
-		  </tr>
+		@include('painel.modal')
+		@endforeach
 		</table>
+      	<div class="pag" >
+          {{ $clients->links( "pagination::bootstrap-4") }}
+        </div>
 	</div>
-</div>		
-
-
-
-
-
-
-
-
-
-
+</div>
+		
+@include('painel.style')
 
 @endsection

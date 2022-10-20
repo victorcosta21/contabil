@@ -10,7 +10,7 @@ class PaymentControl extends Model
     use HasFactory;
     
     protected $table = 'payment_controls';
-    protected $fillable = ['client_id', 'month', 'payment', 'dueDate', 'cpPrevision', 'comments'];
+    protected $fillable = ['client_id', 'month', 'payment', 'dueDate', 'cpPrevision', 'comments','ammount'];
 
     public function client()
     {

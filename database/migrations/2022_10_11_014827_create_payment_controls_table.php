@@ -21,6 +21,7 @@ class CreatePaymentControlsTable extends Migration
             $table->string('dueDate')->nullable();
             $table->string('cpPrevision')->nullable();
             $table->string('comments')->nullable();
+            $table->double('ammount', 10, 2)->nullable();
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterClientRequest;
 use App\Models\Client;
 use App\Models\Address;
 use App\Models\Contacts;
@@ -21,13 +22,15 @@ class RegisterClient extends Controller
     }
     
     public function store(Request $request)
-    {
+    {   
+        // echo "<pre>"; print_r($request->toArray()); exit;
         try {
                 $check = Client::where('accountNumber', $request->client['accountNumber'])->first();
                 if ($check) {
                     return redirect()->back()->with('error', 'Este número de conta já existe !!');
-            }
+                }
 
+            \DB::beginTransaction();
             $client = Client::create($request->client);
 
             $addre = $request->address;
@@ -41,6 +44,23 @@ class RegisterClient extends Controller
                 'reference'         => $addre['reference']
             ]);
 
+            foreach ($request->month as $key => $mt) {
+                $ammount = str_replace('.','', $mt['ammount']);
+                $ammount = str_replace(',','.', $ammount);
+                $ammount = (float)$ammount;
+                // echo "<pre>"; print_r(gettype($ammount)); exit;
+
+                $month = PaymentControl::create([
+                    'month'         => $mt['month'],
+                    'payment'       => $mt['payment'],
+                    'dueDate'       => $mt['dueDate'],
+                    'cpPrevision'   => $mt['cpPrevision'],
+                    'comments'      => $mt['comments'],
+                    'ammount'       => $ammount,
+                    'client_id'     => $client['id']
+                ]);
+            }
+
             foreach ($request->contacts as $key => $contact) {
                 $ct = Contacts::create([
                     'cttName'       => $contact['cttName'],
@@ -50,25 +70,13 @@ class RegisterClient extends Controller
                 ]);
             }
 
-            foreach ($request->month as $key => $mt) {
-                $month = PaymentControl::create([
-                    'month'         => $mt['month'],
-                    'payment'       => $mt['payment'],
-                    'dueDate'       => $mt['dueDate'],
-                    'cpPrevision'   => $mt['cpPrevision'],
-                    'comments'      => $mt['comments'],
-                    'client_id'     => $client['id']
-                ]);
-            }
-            $etx = $request->extra;
-            $extra = ExtraInformation::create([
-                'informations'      => $etx['informations'],
-                'client_id'         => $client['id']
-            ]);
+            \DB::commit();
+            return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');;
+
         } catch (Exception $e) {
-            return json_decode($e->getResponse()->getBody()->getContents());
+            \DB::rollBack();
+            return redirect()->back()->with('error', 'Houve um erro interno.');
         }
 
-        return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');
     }
 }

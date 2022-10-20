@@ -14,21 +14,21 @@ class Client extends Model
 
     public function contacts()
     {
-        return $this->hasMany(Contacts::class, 'contact_id', 'id');
+        return $this->hasMany(Contacts::class, 'client_id', 'id');
     }
     
     public function address()
     {
-        return $this->hasOne(Address::class, 'id', 'address_id');
+        return $this->hasOne(Address::class, 'client_id', 'id');
     }
 
     public function extra()
     {
-        return $this->hasOne(ExtraInformation::class, 'id', 'extra_id');
+        return $this->hasOne(ExtraInformation::class, 'client_id', 'id');
     }
 
     public function payment()
     {
-        return $this->hasMany(PaymentControl::class, 'id', 'payment_id');
+        return $this->hasMany(PaymentControl::class, 'client_id', 'id');
     }
 }
