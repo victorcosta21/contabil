@@ -14,7 +14,8 @@ class PainelController extends Controller
 {
     public function index()
     {
-        $clients = Client::with('contacts')->with('address')->with('payment')->with('extra')->orderBy('id', 'desc')->paginate(10);
+        $clients = Client::with('contacts')->with('address')->with('payment')->with('extra')->orderBy('id', 'asc')->paginate(10);
+
 
         return view('painel.index')->with(compact('clients'));
     }

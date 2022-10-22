@@ -2,7 +2,6 @@
 
 /* MODAL */
 .modal{
-	margin-top: 100px;
 	--bs-modal-width: 900px !important;
 	--bs-modal-height: 900px !important;
 }
@@ -14,7 +13,8 @@
 
 .modalAtributtes{
 	border: none;
-	outline: 0;	
+	outline: 0;
+	width: 300px;	
 }
 
 .modalBtn {

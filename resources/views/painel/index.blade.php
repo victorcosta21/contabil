@@ -4,6 +4,10 @@
 
 <div class="box">
 	<div class="box-content">
+		<div class="panel">
+			<h3>Total de dividendos</h3>
+			<h4>R$ DIVIDA DE TODOS OS CLIENTES</h4>
+		</div>
 		<div class="actions">
 			<div class="row justify-content-end">
 				<div class="col-sm-3">

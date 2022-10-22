@@ -89,7 +89,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Janeiro</label>
-		      	  <input type="hidden" name="month[1][month]" value="january">
+		      	  <input type="hidden" name="month[1][month]" value="Janeiro">
 			      <select name="month[1][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -102,12 +102,12 @@
 			    	<input type="date" name="month[1][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[1][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[1][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[1][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -118,7 +118,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Fevereiro</label>
-		      	  <input type="hidden" name="month[2][month]" value="february">
+		      	  <input type="hidden" name="month[2][month]" value="Fevereiro">
 			      <select name="month[2][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -131,12 +131,12 @@
 			    	<input type="date" name="month[2][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[2][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[2][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[2][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -147,7 +147,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Março</label>
-		      	  <input type="hidden" name="month[3][month]" value="march">
+		      	  <input type="hidden" name="month[3][month]" value="Março">
 			      <select name="month[3][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -160,12 +160,12 @@
 			    	<input type="date" name="month[3][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[3][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[3][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[3][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -176,7 +176,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Abril</label>
-		      	  <input type="hidden" name="month[4][month]" value="april">
+		      	  <input type="hidden" name="month[4][month]" value="Abril">
 			      <select name="month[4][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -189,12 +189,12 @@
 			    	<input type="date" name="month[4][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[4][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[4][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[4][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -205,7 +205,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Maio</label>
-		      	  <input type="hidden" name="month[5][month]" value="may">
+		      	  <input type="hidden" name="month[5][month]" value="Maio">
 			      <select name="month[5][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -218,12 +218,12 @@
 			    	<input type="date" name="month[5][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[5][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input type="text" name="month[5][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[5][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -234,7 +234,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Junho</label>
-		      	  <input type="hidden" name="month[6][month]" value="june">
+		      	  <input type="hidden" name="month[6][month]" value="Junho">
 			      <select name="month[6][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -247,12 +247,12 @@
 			    	<input type="date" name="month[6][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[6][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[6][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[6][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -263,7 +263,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Julho</label>
-		      	  <input type="hidden" name="month[7][month]" value="july">
+		      	  <input type="hidden" name="month[7][month]" value="Julho">
 			      <select name="month[7][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -276,12 +276,12 @@
 			    	<input type="date" name="month[7][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[7][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[7][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[7][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -292,7 +292,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Agosto</label>
-		      	  <input type="hidden" name="month[8][month]" value="august">
+		      	  <input type="hidden" name="month[8][month]" value="Agosto">
 			      <select name="month[8][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -305,12 +305,12 @@
 			    	<input type="date" name="month[8][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[8][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[8][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[8][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -321,7 +321,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Setembro</label>
-		      	  <input type="hidden" name="month[9][month]" value="september">
+		      	  <input type="hidden" name="month[9][month]" value="Setembro">
 			      <select name="month[9][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -334,12 +334,12 @@
 			    	<input type="date" name="month[9][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[9][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[9][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[9][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -350,7 +350,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Outubro</label>
-		      	  <input type="hidden" name="month[10][month]" value="october">
+		      	  <input type="hidden" name="month[10][month]" value="Outubro">
 			      <select name="month[10][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -363,12 +363,12 @@
 			    	<input type="date" name="month[10][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[10][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[10][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[10][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -379,7 +379,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Novembro</label>
-		      	  <input type="hidden" name="month[11][month]" value="november">
+		      	  <input type="hidden" name="month[11][month]" value="Novembro">
 			      <select name="month[11][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -392,12 +392,12 @@
 			    	<input type="date" name="month[11][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[11][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[11][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[11][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
@@ -408,7 +408,7 @@
 			<div class="row">
 				<div class="form-group col-md-2" style="text-align:center;">
 			      <label for="month" style="font-weight:bolder">Dezembro</label>
-		      	  <input type="hidden" name="month[12][month]" value="december">
+		      	  <input type="hidden" name="month[12][month]" value="Dezembro">
 			      <select name="month[12][payment]" class="form-control">
 			        <option selected value="1">Pendente</option>
 			        <option value="2">Pago via Pix</option>
@@ -421,12 +421,12 @@
 			    	<input type="date" name="month[12][dueDate]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
-			    	<label>Previsão de Pagamento</label>
+			    	<label>Data de Pagamento</label>
 			    	<input type="date" name="month[12][cpPrevision]" class="form-control">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[12][ammount]" class="form-control" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[12][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>

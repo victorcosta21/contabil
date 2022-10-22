@@ -18,8 +18,8 @@ class CreatePaymentControlsTable extends Migration
             $table->integer('client_id')->unsigned();
             $table->string('month');
             $table->integer('payment');
-            $table->string('dueDate')->nullable();
-            $table->string('cpPrevision')->nullable();
+            $table->string('dueDate')->nullable()->default('0000-00-00');
+            $table->string('cpPrevision')->nullable()->default('0000-00-00');
             $table->string('comments')->nullable();
             $table->double('ammount', 10, 2)->nullable();
             $table->timestamps();
