@@ -5,7 +5,7 @@
 <div class="box">
 	<div class="box-content">
 		<div class="panel">
-			<h3>Total de dividendos</h3>
+			<h3>Total de inadimplentes</h3>
 			<h4>R$ DIVIDA DE TODOS OS CLIENTES</h4>
 		</div>
 		<div class="actions">
@@ -17,11 +17,11 @@
 		</div>
 		<table class="table mt-4">
 		  <tr>
-			<th width="10%">#</th>
+			<th width="5%">#</th>
 			<th width="25%">Nome</th>
 			<th width="25%">E-mail</th>
-			<th width="20%">Documento</th>
-			<th width="5%">Visualizar</th>
+			<th width="15%">Documento</th>
+			<th width="15%"></th>
 		  </tr>
 
 	  	@foreach($clients as $key => $client)
@@ -31,8 +31,14 @@
 			<td>{{ $client->name }}</td>
 			<td>{{ $client->email }}</td>
 			<td>{{ $client->document }}</td>
-			<td>
+			<td style="display: flex;">
+				<a href="{{ route('edit-client', ['id' => $client->id]) }}" class="fa fa-edit editBtn" type="button"></a> 
 				<button class="fa fa-address-card-o modalBtn" data-bs-toggle="modal" data-bs-target="#datailModal{{ $client->accountNumber }}" ></button>
+					<form action="{{ route('delete-client', ['id' => $client->id]) }}" method="POST">
+						@csrf
+						@method('delete')
+						<button type="submit" class="fa fa-trash deleteBtn" onclick="return confirm('Deseja exluir esse registro?')"></button>
+					</form>
 				</td>
 		  </tr>
 		@include('painel.modal')
@@ -43,6 +49,8 @@
         </div>
 	</div>
 </div>
+<script>
+</script>
 		
 @include('painel.style')
 

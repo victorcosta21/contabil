@@ -8,28 +8,28 @@
 		<h4 style="text-align:center;">Dados referente ao cliente</h4><br>
 		@include('register.alert')
 
-		<form class="form-group" action="{{ route('store') }}" method="POST">
+		<form class="form-group" action="{{ route('update-client', ['id' => $client->id]) }}" method="POST">
 			@csrf
 			<div class="row">
 				<div class="form-group col-md-1">
 					<label>Nº Conta</label>
-					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ old('client[accountNumber]') }}" required>
+					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ $client->accountNumber }}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Nome</label>
-					<input type="text" name="client[name]" class="form-control" maxlength="40" placeholder="Digite o nome e sobrenome do cliente" value="{{ old('client[name]') }}" required >
+					<input type="text" name="client[name]" class="form-control" maxlength="40" placeholder="Digite o nome e sobrenome do cliente" value="{{ $client->name }}" required >
 				</div>
 				<div class="form-group col-md-2">
 					<label>Documento</label>
-					<input type="text" name="client[document]" class="form-control" id="document" maxlength="20" placeholder="CPF ou CNPJ" value="{{ old('client[document]') }}" required>
+					<input type="text" name="client[document]" class="form-control" id="document" maxlength="20" placeholder="CPF ou CNPJ" value="{{ $client->document }}" required>
 				</div>
 				<div class="form-group col-md-3">
 					<label>E-mail</label>
-					<input type="email" name="client[email]" class="form-control" maxlength="35" placeholder="email@email.com" value="{{ old('client[email]') }}" required>
+					<input type="email" name="client[email]" class="form-control" maxlength="35" placeholder="email@email.com" value="{{ $client->email }}" required>
 				</div>
 				<div class="form-group col-md-2">
 					<label>Cliente desde:</label>
-					<input type="date" name="client[date]" class="form-control" required>
+					<input type="date" name="client[date]" class="form-control" value="{{$client->date}}" required>
 				</div>
 			</div><br>
 				<div id="moreCtt">
@@ -38,15 +38,15 @@
 					<div id="formCtt1" class="form-group row">
 						<div class="form-group col-md-3" id="cttName">
 							<label>Nome do Contato 1</label>
-							<input type="text" name="contacts[1][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" value="{{ old('contacts[1][cttName]') }}" required>
+							<input type="text" name="contacts[1][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" value="{{ $client->contacts[0]->cttName}}" required>
 						</div>
 						<div class="form-group col-md-2" id="cttCel">
 							<label>Celular 1</label>
-							<input type="text" name="contacts[1][cttCel]" class="form-control mask_phone" placeholder="(00)00000-0000" value="{{ old('contacts[1][cttCel]') }}" required>
+							<input type="text" name="contacts[1][cttCel]" class="form-control mask_phone" placeholder="(00)00000-0000" value="{{ $client->contacts[0]->cttCel }}" required>
 						</div>
 						<div class="form-group col-md-5" id="cttDesc">
 							<label>Descrição 1</label>
-							<input type="text" name="contacts[1][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50" value="{{ old('contacts[1][cttDesc]') }}" required>
+							<input type="text" name="contacts[1][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50" value="{{ $client->contacts[0]->cttDesc }}" required>
 						</div>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="form-group col-md-2">
 					<label>CEP</label>
-					<input type="text" name="address[cep]" class="form-control mask_cep" id="cep" maxlength="15" placeholder="00000-000" value="{{ old('address[cep]') }}" required>
+					<input type="text" name="address[cep]" class="form-control mask_cep" id="cep" maxlength="15" placeholder="00000-000" value="{{ $client->address->cep }}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Bairro</label>
@@ -72,11 +72,11 @@
 				</div>
 				<div class="form-group col-md-3">
 					<label>Endereço</label>
-					<input type="text" name="address[road]" class="form-control" id="rua" maxlength="45" placeholder="Ex: Rua Santa Otilia" value="{{ old('address[road]') }}" required>
+					<input type="text" name="address[road]" class="form-control" id="rua" maxlength="45" placeholder="Ex: Rua Santa Otilia" value="{{ $client->address->road }}" required>
 				</div>
 				<div class="form-group col-md-1">
 					<label>Número</label>
-					<input type="text" name="address[number]" class="form-control" maxlength="5" placeholder="00000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ old('address[number]') }}" required>					
+					<input type="text" name="address[number]" class="form-control" maxlength="5" placeholder="00000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ $client->address->number }}" required>					
 				</div>
 			</div><br><br>
 
@@ -95,19 +95,19 @@
 			    </div><br>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[1][dueDate]" class="form-control">
+			    	<input type="date" name="month[1][dueDate]" class="form-control" value="{{ isset($client->payment[0]->dueDate) && $client->payment[0]->dueDate == 1 ? '' : $client->payment[0]->dueDate}}">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[1][cpPrevision]" class="form-control">
+			    	<input type="date" name="month[1][cpPrevision]" class="form-control" value="{{ isset($client->payment[0]->cpPrevision) && $client->payment[0]->cpPrevision == 1 ? '' : $client->payment[0]->cpPrevision}}">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[1][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[1][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[0]->ammount) && $client->payment[0]->ammount == 1 ? '' : $client->payment[0]->ammount}}">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[1][comments]" class="form-control" maxlength="40">
+					<input type="text" name="month[1][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[0]->comments) && $client->payment[0]->comments == 1 ? '' : $client->payment[0]->comments}}">
 				</div>
 			</div><br><hr><br>
 
@@ -124,19 +124,19 @@
 			    </div>
 			    <div class="form-group col-md-2">
 			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[2][dueDate]" class="form-control">
+			    	<input type="date" name="month[2][dueDate]" class="form-control" value="{{ isset($client->payment[1]->dueDate) && $client->payment[1]->dueDate == 1 ? '' : $client->payment[1]->dueDate}}">
 				</div>
 				<div class="form-group col-md-2">
 			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[2][cpPrevision]" class="form-control">
+			    	<input type="date" name="month[2][cpPrevision]" class="form-control" value="{{ isset($client->payment[1]->cpPrevision) && $client->payment[1]->cpPrevision == 1 ? '' : $client->payment[1]->cpPrevision}}">
 				</div>
 				<div class="form-group col-md-2">
 					<label>Valor</label>
-					<input name="month[2][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
+					<input name="month[2][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[1]->ammount) && $client->payment[1]->ammount == 1 ? '' : $client->payment[1]->ammount}}">
 				</div>
 				<div class="form-group col-md-4">
 					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[2][comments]" class="form-control" maxlength="40">
+					<input type="text" name="month[2][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[1]->comments) && $client->payment[1]->comments == 1 ? '' : $client->payment[1]->comments}}">
 				</div>
 			</div><br><hr><br>
 

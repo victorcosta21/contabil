@@ -20,8 +20,6 @@ class CreateAddressesTable extends Migration
             $table->string('cep');
             $table->string('road');
             $table->integer('number');
-            $table->string('complement')->nullable();
-            $table->string('reference')->nullable();
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('environment_id')->references('id')->on('environments');

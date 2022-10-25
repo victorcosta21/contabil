@@ -31,4 +31,9 @@ class Client extends Model
     {
         return $this->hasMany(PaymentControl::class, 'client_id', 'id');
     }
+
+    public function paySum()
+    {
+        return $this->hasMany(PaymentControl::class, 'client_id', 'id')->where('payment', '1');
+    }
 }

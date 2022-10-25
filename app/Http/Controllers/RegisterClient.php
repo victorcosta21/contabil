@@ -23,7 +23,6 @@ class RegisterClient extends Controller
     
     public function store(Request $request)
     {   
-        // echo "<pre>"; print_r($request->toArray()); exit;
         try {
                 $check = Client::where('accountNumber', $request->client['accountNumber'])->first();
                 if ($check) {
@@ -39,9 +38,7 @@ class RegisterClient extends Controller
                 'environment_id'    => $addre['environment'],
                 'cep'               => $addre['cep'],
                 'number'            => $addre['number'],
-                'road'              => $addre['road'],
-                'complement'        => $addre['complement'],
-                'reference'         => $addre['reference']
+                'road'              => $addre['road']  
             ]);
 
             foreach ($request->month as $key => $mt) {
@@ -70,12 +67,32 @@ class RegisterClient extends Controller
             }
 
             \DB::commit();
-            return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');;
+            return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');
 
         } catch (Exception $e) {
             \DB::rollBack();
             return redirect()->back()->with('error', 'Houve um erro interno.');
         }
 
+    }
+
+    public function edit($id)
+    {
+        $client = Client::where('id', $id)->with('contacts')->with('address')->with('payment')->with('extra')->first();
+        // echo "<pre>"; print_r($client->toArray()); exit;
+
+        return view('register.edit')->with(compact('client'));
+    }
+
+    public function update($id)
+    {
+        echo "update"; exit;
+    }
+
+    public function destroy($id)
+    {
+        Client::where('id', $id)->delete();
+
+        return redirect()->back()->with('success', 'Client deletado com sucesso!');
     }
 }
