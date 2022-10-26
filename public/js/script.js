@@ -17,31 +17,13 @@ $(document).ready(function($){
     $('.mask_limit').mask('XXXXXXXXXXXXXXX' + '...', {translation: {'X': {pattern: /[0-9A-Za-z/\W|_/]/, optional: true}}});
 });
 
-$("#document").keydown(function(){
-    try {
-        $("#document").unmask();
-    } catch (e) {}
-
-    var tamanho = $("#document").val().length;
-
-    if(tamanho < 11){
-        $("#document").mask("999.999.999-99");
-    } else {
-        $("#document").mask("99.999.999/9999-99");
+var options = {
+    onKeyPress: function (cpf, ev, el, op) {
+        var masks = ['000.000.000-000', '00.000.000/0000-00'];
+        $('#document').mask((cpf.length > 14) ? masks[1] : masks[0], op);
     }
-
-    // ajustando foco
-    var elem = this;
-    setTimeout(function(){
-        // mudo a posição do seletor
-        elem.selectionStart = elem.selectionEnd = 10000;
-    }, 0);
-    // reaplico o valor para mudar o foco
-    var currentValue = $(this).val();
-    $(this).val('');
-    $(this).val(currentValue);
-});
-
+}
+$('#document').length > 11 ? $('#document').mask('00.000.000/0000-00', options) : $('#document').mask('000.000.000-00#', options);
 
 /* VIA CEP */
 $(document).ready(function() {

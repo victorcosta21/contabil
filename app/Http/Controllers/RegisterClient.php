@@ -78,8 +78,7 @@ class RegisterClient extends Controller
 
     public function edit($id)
     {
-        $client = Client::where('id', $id)->with('contacts')->with('address')->with('payment')->with('extra')->first();
-        // echo "<pre>"; print_r($client->toArray()); exit;
+        $client = Client::where('id', $id)->with('contacts', 'address', 'payment', 'extra')->first();
 
         return view('register.edit')->with(compact('client'));
     }

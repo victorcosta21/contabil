@@ -21,7 +21,7 @@
 				</div>
 				<div class="form-group col-md-2">
 					<label>Documento</label>
-					<input type="text" name="client[document]" class="form-control" id="document" maxlength="20" placeholder="CPF ou CNPJ" value="{{ old('client[document]') }}" required>
+					<input type="text" name="client[document]" class="form-control document" id="document" maxlength="20" placeholder="CPF ou CNPJ" value="{{ old('client[document]') }}" required>
 				</div>
 				<div class="form-group col-md-3">
 					<label>E-mail</label>

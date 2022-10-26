@@ -6,7 +6,7 @@
 	<div class="box-content">
 		<div class="panel">
 			<h3>Total de inadimplentes</h3>
-			<h4>R$ DIVIDA DE TODOS OS CLIENTES</h4>
+			<h4>R$ {{number_format($totVal, 2, ',', '.')}}</h4>
 		</div>
 		<div class="actions">
 			<div class="row justify-content-end">

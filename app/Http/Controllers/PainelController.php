@@ -15,7 +15,12 @@ class PainelController extends Controller
     public function index()
     {
         $clients = Client::with('contacts')->with('address')->with('payment')->with('extra')->orderBy('id', 'desc')->paginate(10);
+        $data = [];
+        foreach($clients as $key => $cli){
+            $data[$key] = $cli->payment->where('payment', 1)->sum('ammount');
+        }
+        $totVal = array_sum($data);
 
-        return view('painel.index')->with(compact('clients'));
+        return view('painel.index')->with(compact('clients', 'totVal'));
     }
 }

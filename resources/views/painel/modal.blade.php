@@ -7,7 +7,7 @@
 	  </div>
 	  <div class="modal-body">
 		<div class="form-group row">
-		    <div class="form-group col-md-3">
+		    <div class="form-group col-md-4">
 				<label class="modalLabel">Nome</label>
 		    </div>
 		  	<div class="form-group col-md-3">
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 	  	<div class="form-group row"> 
-		  	<div class="form-group col-md-3">
+		  	<div class="form-group col-md-4">
 				<input type="text" name="name" value="{{$client->name}}" class="modalAtributtes" readonly>
 		  	</div>
 		  	<div class="form-group col-md-3">
@@ -29,9 +29,12 @@
 			</div>
 		</div>
 		<hr>
+			@php
+				$val = $client->payment->where('payment', 1)->sum('ammount');
+			@endphp
 		<div class="form-group row" style="text-align:center;">
 			<label class="modalLabel">Valor total de dívidas</label>
-			<h6>R$ VALOR TOTOAL DA DIVIDA</h6>
+			<h6>R$ {{number_format($val, 2, ',', '.')}}</h6>
 			
 		</div>
 		<hr>

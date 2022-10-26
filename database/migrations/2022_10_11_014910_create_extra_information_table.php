@@ -15,7 +15,7 @@ class CreateExtraInformationTable extends Migration
     {
         Schema::create('extra_information', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id')->unsigned();
+            $table->bigInteger('client_id')->unsigned();
             $table->text('informations')->nullable();
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');

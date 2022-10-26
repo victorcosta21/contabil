@@ -15,7 +15,7 @@ class CreatePaymentControlsTable extends Migration
     {
         Schema::create('payment_controls', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id')->unsigned();
+            $table->bigInteger('client_id')->unsigned();
             $table->string('month');
             $table->integer('payment');
             $table->string('dueDate')->nullable()->default('0000-00-00');
