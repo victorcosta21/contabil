@@ -14,7 +14,7 @@ class PainelController extends Controller
 {
     public function index()
     {
-        $clients = Client::with('contacts')->with('address')->with('payment')->with('extra')->orderBy('id', 'desc')->paginate(10);
+        $clients = Client::with('contacts', 'address', 'payment', 'extra')->orderBy('id', 'desc')->paginate(10);
         $data = [];
         foreach($clients as $key => $cli){
             $data[$key] = $cli->payment->where('payment', 1)->sum('ammount');

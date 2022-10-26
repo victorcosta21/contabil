@@ -8,12 +8,12 @@
 		<h4 style="text-align:center;">Dados referente ao cliente</h4><br>
 		@include('register.alert')
 
-		<form class="form-group" action="{{ route('update-client', ['id' => $client->id]) }}" method="POST">
+		<form class="form-group" action="{{ route('store') }}" method="POST">
 			@csrf
 			<div class="row">
 				<div class="form-group col-md-1">
 					<label>Nº Conta</label>
-					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ $client->accountNumber }}" required>
+					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ $client->id }}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Nome</label>
@@ -21,7 +21,7 @@
 				</div>
 				<div class="form-group col-md-2">
 					<label>Documento</label>
-					<input type="text" name="client[document]" class="form-control" id="document" maxlength="20" placeholder="CPF ou CNPJ" value="{{ $client->document }}" required>
+					<input type="text" name="client[document]" class="form-control document" id="document" maxlength="20" placeholder="CPF ou CNPJ" value="{{ $client->document }}" required>
 				</div>
 				<div class="form-group col-md-3">
 					<label>E-mail</label>
@@ -29,28 +29,37 @@
 				</div>
 				<div class="form-group col-md-2">
 					<label>Cliente desde:</label>
-					<input type="date" name="client[date]" class="form-control" value="{{$client->date}}" required>
+					<input type="date" name="client[date]" class="form-control" value="{{ $client->date }}" required >
 				</div>
 			</div><br>
 				<div id="moreCtt">
 					<button type="button" class="btn btn-success fa fa-plus" onclick="moreCtt()"></button>
 					<button type="button" class="btn btn-danger fa fa-minus" onclick="downCtt()"></button>
-					<div id="formCtt1" class="form-group row">
-						<div class="form-group col-md-3" id="cttName">
-							<label>Nome do Contato 1</label>
-							<input type="text" name="contacts[1][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" value="{{ $client->contacts[0]->cttName}}" required>
+					@foreach($client->contacts as $key => $ct)
+						<div id="formCtt1" class="form-group row" style="margin-bottom:10px;">
+							<div class="form-group col-md-3" id="cttName">
+								<label>Nome do Contato</label>
+								<input type="text" name="contacts[{{$key}}][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" value="{{ $ct->cttName }}" required>
+							</div>
+							<div class="form-group col-md-2" id="cttCel">
+								<label>Celular</label>
+								<input type="text" name="contacts[{{$key}}][cttCel]" class="form-control mask_phone" placeholder="(00)00000-0000" value="{{ $ct->cttCel }}" required>
+							</div>
+							<div class="form-group col-md-5" id="cttDesc">
+								<label>Descrição</label>
+								<input type="text" name="contacts[{{$key}}][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50" value="{{ $ct->cttDesc }}" required>
+							</div>
 						</div>
-						<div class="form-group col-md-2" id="cttCel">
-							<label>Celular 1</label>
-							<input type="text" name="contacts[1][cttCel]" class="form-control mask_phone" placeholder="(00)00000-0000" value="{{ $client->contacts[0]->cttCel }}" required>
-						</div>
-						<div class="form-group col-md-5" id="cttDesc">
-							<label>Descrição 1</label>
-							<input type="text" name="contacts[1][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50" value="{{ $client->contacts[0]->cttDesc }}" required>
-						</div>
-					</div>
+
+						@php
+							$lastVal = $key;
+						@endphp
+					@endforeach
+						@php
+							$lastVal++
+						@endphp
 				</div>
-				<input type="hidden" id="last" value="2"><br><br>
+				<input type="hidden" id="last" value="{{ $lastVal }}"><br><br>
 
 			<h4 style="text-align:center;">Dados referente ao local de instalação</h4><br>
 
@@ -68,7 +77,7 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label>Bairro</label>
-					<input type="text" name="address[district]" class="form-control" id="bairro" maxlength="45" placeholder="Ex: Vila Sagrado Coração de Maria">
+					<input type="text" name="address[district]" class="form-control" id="bairro" maxlength="45" placeholder="Ex: Vila Sagrado Coração de Maria" {{-- value="{{ $client->address->cep }}" --}}>
 				</div>
 				<div class="form-group col-md-3">
 					<label>Endereço</label>
@@ -82,353 +91,36 @@
 
 			<h4 style="text-align:center;">Controle de Pagamento</h4><br>
 
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Janeiro</label>
-		      	  <input type="hidden" name="month[1][month]" value="Janeiro">
-			      <select name="month[1][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div><br>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[1][dueDate]" class="form-control" value="{{ isset($client->payment[0]->dueDate) && $client->payment[0]->dueDate == 1 ? '' : $client->payment[0]->dueDate}}">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[1][cpPrevision]" class="form-control" value="{{ isset($client->payment[0]->cpPrevision) && $client->payment[0]->cpPrevision == 1 ? '' : $client->payment[0]->cpPrevision}}">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[1][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[0]->ammount) && $client->payment[0]->ammount == 1 ? '' : $client->payment[0]->ammount}}">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[1][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[0]->comments) && $client->payment[0]->comments == 1 ? '' : $client->payment[0]->comments}}">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Fevereiro</label>
-		      	  <input type="hidden" name="month[2][month]" value="Fevereiro">
-			      <select name="month[2][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[2][dueDate]" class="form-control" value="{{ isset($client->payment[1]->dueDate) && $client->payment[1]->dueDate == 1 ? '' : $client->payment[1]->dueDate}}">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[2][cpPrevision]" class="form-control" value="{{ isset($client->payment[1]->cpPrevision) && $client->payment[1]->cpPrevision == 1 ? '' : $client->payment[1]->cpPrevision}}">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[2][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[1]->ammount) && $client->payment[1]->ammount == 1 ? '' : $client->payment[1]->ammount}}">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[2][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[1]->comments) && $client->payment[1]->comments == 1 ? '' : $client->payment[1]->comments}}">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Março</label>
-		      	  <input type="hidden" name="month[3][month]" value="Março">
-			      <select name="month[3][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[3][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[3][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[3][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[3][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Abril</label>
-		      	  <input type="hidden" name="month[4][month]" value="Abril">
-			      <select name="month[4][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[4][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[4][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[4][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[4][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Maio</label>
-		      	  <input type="hidden" name="month[5][month]" value="Maio">
-			      <select name="month[5][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[5][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[5][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[5][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input name="month[5][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Junho</label>
-		      	  <input type="hidden" name="month[6][month]" value="Junho">
-			      <select name="month[6][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[6][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[6][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[6][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[6][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Julho</label>
-		      	  <input type="hidden" name="month[7][month]" value="Julho">
-			      <select name="month[7][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[7][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[7][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[7][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[7][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Agosto</label>
-		      	  <input type="hidden" name="month[8][month]" value="Agosto">
-			      <select name="month[8][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[8][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[8][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[8][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[8][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Setembro</label>
-		      	  <input type="hidden" name="month[9][month]" value="Setembro">
-			      <select name="month[9][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[9][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[9][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[9][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[9][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Outubro</label>
-		      	  <input type="hidden" name="month[10][month]" value="Outubro">
-			      <select name="month[10][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[10][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[10][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[10][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[10][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Novembro</label>
-		      	  <input type="hidden" name="month[11][month]" value="Novembro">
-			      <select name="month[11][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[11][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[11][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[11][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[11][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br>
-
-			<div class="row">
-				<div class="form-group col-md-2" style="text-align:center;">
-			      <label for="month" style="font-weight:bolder">Dezembro</label>
-		      	  <input type="hidden" name="month[12][month]" value="Dezembro">
-			      <select name="month[12][payment]" class="form-control">
-			        <option selected value="1">Pendente</option>
-			        <option value="2">Pago via Pix</option>
-			        <option value="3">Pago via Boleto</option>
-			        <option value="4">Pago via Cartão Créd</option>
-			      </select>
-			    </div>
-			    <div class="form-group col-md-2">
-			    	<label>Data de Vencimento</label>
-			    	<input type="date" name="month[12][dueDate]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-			    	<label>Data de Pagamento</label>
-			    	<input type="date" name="month[12][cpPrevision]" class="form-control">
-				</div>
-				<div class="form-group col-md-2">
-					<label>Valor</label>
-					<input name="month[12][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00">
-				</div>
-				<div class="form-group col-md-4">
-					<label>Anotações referente ao pagamento</label>
-					<input type="text" name="month[12][comments]" class="form-control" maxlength="40">
-				</div>
-			</div><br><hr><br><br>
+			@foreach($months as $key => $mont)
+				<div class="row">
+					<div class="form-group col-md-2" style="text-align:center;">
+				      <label for="month" style="font-weight:bolder">{{$mont->month}}</label>
+			      	  <input type="hidden" name="month[{{$key}}][month]" value="{{$mont->month}}">
+				      <select name="month[{{$key}}][payment]" class="form-control">
+				        <option selected value="1">Pendente</option>
+				        <option value="2">Pago via Pix</option>
+				        <option value="3">Pago via Boleto</option>
+				        <option value="4">Pago via Cartão Créd</option>
+				      </select>
+				    </div><br>
+				    <div class="form-group col-md-2">
+				    	<label>Data de Vencimento</label>
+				    	<input type="date" name="month[{{$key}}][dueDate]" class="form-control" value="{{ isset($client->payment[$key]->dueDate) && !empty($client->payment[$key]->dueDate) ? $client->payment[$key]->dueDate : ''}}">
+					</div>
+					<div class="form-group col-md-2">
+				    	<label>Data de Pagamento</label>
+				    	<input type="date" name="month[{{$key}}][cpPrevision]" class="form-control" value="{{ isset($client->payment[$key]->cpPrevision) && !empty($client->payment[$key]->cpPrevision) ? $client->payment[$key]->cpPrevision : ''}}">
+					</div>
+					<div class="form-group col-md-2">
+						<label>Valor</label>
+						<input name="month[{{$key}}][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[$key]->ammount) && !empty($client->payment[$key]->ammount) ? $client->payment[$key]->ammount : ''}}">
+					</div>
+					<div class="form-group col-md-4">
+						<label>Anotações referente ao pagamento</label>
+						<input type="text" name="month[{{$key}}][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[$key]->comments) && !empty($client->payment[$key]->comments) ? number_format($client->payment[$key]->comments, 2, ',', '.') : ''}}">
+					</div>
+				</div><br><hr><br>
+			@endforeach
 
 			<h4 style="text-align:center;">Informações extras</h4><br>
 
@@ -454,15 +146,15 @@ function moreCtt() {
 	var div = [];
 	div.push('<div id="formCtt' + last + '" class="form-group row" style="margin-top:15px;">');
 	div.push('<div class="form-group col-md-3" id="cttName' + last + '">');
-	div.push('<label>Nome do Contato ' + last + '</label>');
+	div.push('<label>Nome do Contato</label>');
 	div.push('<input type="text" name="contacts[' + last + '][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20">');
 	div.push('</div>');
 	div.push('<div class="form-group col-md-2" id="cttCel' + last + '">');
-	div.push('<label>Celular ' + last + '</label>');
+	div.push('<label>Celular</label>');
 	div.push('<input type="text" name="contacts[' + last + '][cttCel]" class="form-control mask_phone" placeholder="(00)00000-0000">');
 	div.push('</div>');
 	div.push('<div class="form-group col-md-5" id="cttDesc' + last + '">');
-	div.push('<label>Descrição ' + last + ' </label>');
+	div.push('<label>Descrição</label>');
 	div.push('<input type="text" name="contacts[' + last + '][cttDesc]" class="form-control" placeholder="Descreva em poucas palavras quem é esse contato" maxlength="50">');
 	div.push('</div>');
 	div.push('</div>');

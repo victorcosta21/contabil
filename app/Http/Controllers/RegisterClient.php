@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterClientRequest;
 use App\Models\Client;
+use App\Models\Months;
 use App\Models\Address;
 use App\Models\Contacts;
 use App\Models\Environment;
@@ -15,10 +16,10 @@ use App\Models\PaymentControl;
 class RegisterClient extends Controller
 {
     public function index()
-    {
-        $environment = Environment::all();
+    {   
+        $months = Months::all();
 
-        return view('register.index')->with(compact('environment'));
+        return view('register.index')->with(compact('months'));
     }
     
     public function store(Request $request)
@@ -79,8 +80,9 @@ class RegisterClient extends Controller
     public function edit($id)
     {
         $client = Client::where('id', $id)->with('contacts', 'address', 'payment', 'extra')->first();
+        $months = Months::all();
 
-        return view('register.edit')->with(compact('client'));
+        return view('register.edit')->with(compact('client', 'months'));
     }
 
     public function update($id)
