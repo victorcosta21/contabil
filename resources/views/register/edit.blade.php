@@ -8,12 +8,13 @@
 		<h4 style="text-align:center;">Dados referente ao cliente</h4><br>
 		@include('register.alert')
 
-		<form class="form-group" action="{{ route('store') }}" method="POST">
+		<form class="form-group" action="{{ route('update', ['id' => $client->id]) }}" method="POST">
+			@method('PUT')
 			@csrf
 			<div class="row">
 				<div class="form-group col-md-1">
 					<label>Nº Conta</label>
-					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ $client->id }}" required>
+					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ $client->accountNumber }}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Nome</label>
@@ -132,7 +133,7 @@
 			</div>
 			<div class="row justify-content-md-end">
 				<div class="form-group col-md-2 mt-4">
-					<button type="submit" class="btn btn-primary">Cadastrar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
 				</div>
 			</div>
 		</form>

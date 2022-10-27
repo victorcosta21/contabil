@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('home/register-client', [App\Http\Controllers\RegisterClient::class, 'index'])->name('register-client');
     Route::post('/', [App\Http\Controllers\RegisterClient::class, 'store'])->name('store');
     Route::get('home/{id}/edit-client', [App\Http\Controllers\RegisterClient::class, 'edit'])->name('edit-client');
-    Route::put('home/{id}/', [App\Http\Controllers\RegisterClient::class, 'update'])->name('update-client');
+    Route::put('home/{id}/', [App\Http\Controllers\RegisterClient::class, 'update'])->name('update');
     Route::delete('home/{id}/', [App\Http\Controllers\RegisterClient::class, 'destroy'])->name('delete-client');
 
 });

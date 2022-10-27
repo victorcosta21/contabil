@@ -85,9 +85,59 @@ class RegisterClient extends Controller
         return view('register.edit')->with(compact('client', 'months'));
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        echo "update"; exit;
+        echo "<pre>"; print_r($request->toArray());exit;
+        try {
+            \DB::beginTransaction();
+
+            Client::update($request->client);
+            Address::update($request->client);
+            Contacts::update($request->client);
+            ExtraInformation::update($request->client);
+            PaymentControl::update($request->client);
+
+            // $addre = $request->address;
+            // $address = Address::update([
+            //     'client_id'         => $client['id'],
+            //     'environment_id'    => $addre['environment'],
+            //     'cep'               => $addre['cep'],
+            //     'number'            => $addre['number'],
+            //     'road'              => $addre['road']  
+            // ]);
+
+            // foreach ($request->month as $key => $mt) {
+            //     $ammount = str_replace('.','', $mt['ammount']);
+            //     $ammount = str_replace(',','.', $ammount);
+            //     $ammount = (float)$ammount;
+
+            //     $month = PaymentControl::update([
+            //         'month'         => $mt['month'],
+            //         'payment'       => $mt['payment'],
+            //         'dueDate'       => $mt['dueDate'],
+            //         'cpPrevision'   => $mt['cpPrevision'],
+            //         'comments'      => $mt['comments'],
+            //         'ammount'       => $ammount,
+            //         'client_id'     => $client['id']
+            //     ]);
+            // }
+
+            // foreach ($request->contacts as $key => $contact) {
+            //     $ct = Contacts::update([
+            //         'cttName'       => $contact['cttName'],
+            //         'cttCel'        => $contact['cttCel'],
+            //         'cttDesc'       => $contact['cttDesc'],
+            //         'client_id'     => $client['id']
+            //     ]);
+            // }
+
+            \DB::commit();
+            return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');
+
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return redirect()->back()->with('error', 'Houve um erro interno.');
+        }
     }
 
     public function destroy($id)
