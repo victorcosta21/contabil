@@ -37,6 +37,7 @@ class RegisterClient extends Controller
             $address = Address::create([
                 'client_id'         => $client['id'],
                 'environment_id'    => $addre['environment'],
+                'district'          => $addre['district'],
                 'cep'               => $addre['cep'],
                 'number'            => $addre['number'],
                 'road'              => $addre['road']  
@@ -66,6 +67,11 @@ class RegisterClient extends Controller
                     'client_id'     => $client['id']
                 ]);
             }
+            $extr = $request->extra;
+            $extra = ExtraInformation::create([
+                'informations'      => $extr['informations'],
+                'client_id'         => $client['id']
+            ]);
 
             \DB::commit();
             return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');
@@ -87,63 +93,69 @@ class RegisterClient extends Controller
 
     public function update(Request $request, $id)
     {
-        echo "<pre>"; print_r($request->toArray());exit;
+        // echo "<pre>"; print_r($request->toArray());exit;
         try {
-            \DB::beginTransaction();
+                \DB::beginTransaction();
 
-            Client::update($request->client);
-            Address::update($request->client);
-            Contacts::update($request->client);
-            ExtraInformation::update($request->client);
-            PaymentControl::update($request->client);
+                $data = $request->all();
 
-            // $addre = $request->address;
-            // $address = Address::update([
-            //     'client_id'         => $client['id'],
-            //     'environment_id'    => $addre['environment'],
-            //     'cep'               => $addre['cep'],
-            //     'number'            => $addre['number'],
-            //     'road'              => $addre['road']  
-            // ]);
+                /*Busca pelo client*/
+                $client = Client::findOrFail($id);
+                $client->update($data);
+                // echo "oi"; exit;
 
-            // foreach ($request->month as $key => $mt) {
-            //     $ammount = str_replace('.','', $mt['ammount']);
-            //     $ammount = str_replace(',','.', $ammount);
-            //     $ammount = (float)$ammount;
+                /*Atualiza os contatos*/
+                // echo "<pre>"; print_r($request->contacts); exit;
+                foreach ($request->contacts as $key => $ct) {
+                    $client->contacts->update($ct);
+                }
 
-            //     $month = PaymentControl::update([
-            //         'month'         => $mt['month'],
-            //         'payment'       => $mt['payment'],
-            //         'dueDate'       => $mt['dueDate'],
-            //         'cpPrevision'   => $mt['cpPrevision'],
-            //         'comments'      => $mt['comments'],
-            //         'ammount'       => $ammount,
-            //         'client_id'     => $client['id']
-            //     ]);
-            // }
+                /*Atualiza o endereço*/
+                $client->address->update($request->address);
 
-            // foreach ($request->contacts as $key => $contact) {
-            //     $ct = Contacts::update([
-            //         'cttName'       => $contact['cttName'],
-            //         'cttCel'        => $contact['cttCel'],
-            //         'cttDesc'       => $contact['cttDesc'],
-            //         'client_id'     => $client['id']
-            //     ]);
-            // }
+                /*Atualiza os pagamentos*/
 
-            \DB::commit();
-            return redirect()->back()->with('success', 'Cadastro realizado com sucesso !!');
 
-        } catch (Exception $e) {
-            \DB::rollBack();
-            return redirect()->back()->with('error', 'Houve um erro interno.');
-        }
+
+                /*Verifica se tem alguma extra informação antes de criar ou atualizar*/
+                if (!isset($client->extra)) {
+                    $extr = $request->extra;
+                    ExtraInformation::create([
+                        'informations'      => $extr['informations'],
+                        'client_id'         => $id
+                    ]);
+                } else {
+                    $client->extra->update($request->extra);
+                }
+
+                \DB::commit();
+                return redirect()->back()->with('success', 'Atualização realizada com sucesso !!');
+
+            } catch (Exception $e) {
+                \DB::rollBack();
+                return redirect()->back()->with('error', 'Houve um erro interno.');
+            }
     }
 
     public function destroy($id)
     {
-        Client::where('id', $id)->delete();
+        try {
+            \DB::beginTransaction();
 
-        return redirect()->back()->with('success', 'Client deletado com sucesso!');
+            $client = Client::findOrFail($id);
+            $client->contacts->each->delete();
+            $client->address->delete();
+            $client->payment->each->delete();
+            $client->extra->delete();
+            $client->delete();
+                
+            \DB::commit();
+            return redirect()->back()->with('success', 'Client deletado com sucesso!');
+
+        } catch (Exception $e) {
+                \DB::rollBack();
+                return redirect()->back()->with('error', 'Houve um erro interno.');
+        }
     }
 }
+ 

@@ -78,7 +78,7 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label>Bairro</label>
-					<input type="text" name="address[district]" class="form-control" id="bairro" maxlength="45" placeholder="Ex: Vila Sagrado Coração de Maria" {{-- value="{{ $client->address->cep }}" --}}>
+					<input type="text" name="address[district]" class="form-control" id="bairro" maxlength="45" placeholder="Ex: Vila Sagrado Coração de Maria" value="{{ $client->address->district }}">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Endereço</label>
@@ -114,11 +114,11 @@
 					</div>
 					<div class="form-group col-md-2">
 						<label>Valor</label>
-						<input name="month[{{$key}}][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[$key]->ammount) && !empty($client->payment[$key]->ammount) ? $client->payment[$key]->ammount : ''}}">
+						<input name="month[{{$key}}][ammount]" class="form-control mask_money" maxlength="10" placeholder="R$ 000.000,00" value="{{ isset($client->payment[$key]->ammount) && !empty($client->payment[$key]->ammount) ? number_format($client->payment[$key]->ammount, 2, ',','.') : ''}}">
 					</div>
 					<div class="form-group col-md-4">
 						<label>Anotações referente ao pagamento</label>
-						<input type="text" name="month[{{$key}}][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[$key]->comments) && !empty($client->payment[$key]->comments) ? number_format($client->payment[$key]->comments, 2, ',', '.') : ''}}">
+						<input type="text" name="month[{{$key}}][comments]" class="form-control" maxlength="40" value="{{ isset($client->payment[$key]->comments) && !empty($client->payment[$key]->comments) ? $client->payment[$key]->comments : ''}}">
 					</div>
 				</div><br><hr><br>
 			@endforeach
@@ -128,7 +128,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label>Escreva algumas informações adicionais caso queira :</label>
-				    <textarea class="form-control mt-1" name="extra[informations]" rows="3" maxlength="250" value="{{ old('extra[informations]') }}" ></textarea>
+				    <textarea class="form-control mt-1" name="extra[informations]" rows="3" maxlength="250">{{ isset($client->extra->informations) && !empty($client->extra->informations) ? $client->extra->informations : '' }}</textarea>
 			  	</div>
 			</div>
 			<div class="row justify-content-md-end">

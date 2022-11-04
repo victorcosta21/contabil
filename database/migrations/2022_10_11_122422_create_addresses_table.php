@@ -17,6 +17,7 @@ class CreateAddressesTable extends Migration
             $table->increments('id');
             $table->bigInteger('client_id')->unsigned();
             $table->integer('environment_id')->unsigned();
+            $table->string('district');
             $table->string('cep');
             $table->string('road');
             $table->integer('number');

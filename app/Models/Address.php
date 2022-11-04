@@ -10,7 +10,7 @@ class Address extends Model
     use HasFactory;
 
     protected $table = 'addresses';
-    protected $fillable = ['id', 'client_id', 'environment_id', 'cep', 'road', 'number', 'complement', 'reference'];
+    protected $fillable = ['id', 'client_id', 'environment_id', 'district', 'cep', 'road', 'number', 'complement', 'reference'];
 
     public function client()
     {
