@@ -61,6 +61,7 @@ class RegisterClient extends Controller
 
             foreach ($request->contacts as $key => $contact) {
                 $ct = Contacts::create([
+                    'cttId'         => $contact['cttId'],
                     'cttName'       => $contact['cttName'],
                     'cttCel'        => $contact['cttCel'],
                     'cttDesc'       => $contact['cttDesc'],
@@ -93,39 +94,97 @@ class RegisterClient extends Controller
 
     public function update(Request $request, $id)
     {
-        // echo "<pre>"; print_r($request->toArray());exit;
         try {
                 \DB::beginTransaction();
 
-                $data = $request->all();
-
                 /*Busca pelo client*/
                 $client = Client::findOrFail($id);
-                $client->update($data);
-                // echo "oi"; exit;
+                $client->update($request->client);
 
                 /*Atualiza os contatos*/
-                // echo "<pre>"; print_r($request->contacts); exit;
-                foreach ($request->contacts as $key => $ct) {
-                    $client->contacts->update($ct);
-                }
+                foreach ($request->contacts as $key => $ctts) {
+                    $cttId      = $ctts['cttId'];
+                    $cttName    = $ctts['cttName'];
+                    $cttCel     = $ctts['cttCel'];
+                    $cttDesc    = $ctts['cttDesc'];
 
+                    $data = [
+                        'cttId'     => $cttId,
+                        'cttName'   => $cttName,
+                        'cttCel'    => $cttCel,
+                        'cttDesc'   => $cttDesc
+                    ];
+
+                    $exist = Contacts::where('client_id', $client->id)
+                                        ->where('cttId', $data['cttId'])
+                                        ->first();
+                    if ($exist) {
+                        $exist->update($data);
+                        continue;
+                    }
+
+                    $contact = Contacts::create([
+                        'client_id' => $client->id, 
+                        'cttId'     => $data['cttId'], 
+                        'cttName'   => $data['cttName'], 
+                        'cttCel'    => $data['cttCel'], 
+                        'cttDesc'   => $data['cttDesc']]);
+                }
+                
                 /*Atualiza o endereço*/
                 $client->address->update($request->address);
 
                 /*Atualiza os pagamentos*/
+                foreach ($request->month as $key => $mts) {
+                    $ammount = str_replace('.','', $mts['ammount']);
+                    $ammount = str_replace(',','.', $ammount);
+                    $ammount = (float)$ammount;
 
+                    $month          = $mts['month'];
+                    $payment        = $mts['payment'];
+                    $dueDate        = $mts['dueDate'];
+                    $cpPrevision    = $mts['cpPrevision'];
+                    $ammount        = $ammount;
+                    $comments       = $mts['comments'];
+
+                    $data = [
+                        'month'         => $month ,
+                        'payment'       => $payment,
+                        'dueDate'       => $dueDate,
+                        'cpPrevision'   => $cpPrevision,
+                        'ammount'       => $ammount,
+                        'comments'      => $comments
+                    ];
+
+                    $exist = PaymentControl::where('client_id', $client->id)
+                                        ->where('month', $data['month'])
+                                        ->first();
+                    if ($exist) {
+                        $exist->update($data);
+                        continue;
+                    }
+
+                    $contact = Contacts::create([
+                        'client_id'     => $client->id, 
+                        'month'         => $data['month'], 
+                        'payment'       => $data['payment'], 
+                        'dueDate'       => $data['dueDate'], 
+                        'cpPrevision'   => $data['cpPrevision'],
+                        'ammount'       => $data['ammount'],
+                        'comments'      => $data['comments']
+                    ]);
+                }
 
 
                 /*Verifica se tem alguma extra informação antes de criar ou atualizar*/
-                if (!isset($client->extra)) {
+                if (isset($client->extra)) {
+                    $client->extra->update($request->extra);
+                } else {
                     $extr = $request->extra;
                     ExtraInformation::create([
                         'informations'      => $extr['informations'],
                         'client_id'         => $id
                     ]);
-                } else {
-                    $client->extra->update($request->extra);
                 }
 
                 \DB::commit();
@@ -153,8 +212,8 @@ class RegisterClient extends Controller
             return redirect()->back()->with('success', 'Client deletado com sucesso!');
 
         } catch (Exception $e) {
-                \DB::rollBack();
-                return redirect()->back()->with('error', 'Houve um erro interno.');
+            \DB::rollBack();
+            return redirect()->back()->with('error', 'Houve um erro interno.');
         }
     }
 }

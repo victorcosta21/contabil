@@ -36,8 +36,12 @@
 				<div id="moreCtt">
 					<button type="button" class="btn btn-success fa fa-plus" onclick="moreCtt()"></button>
 					<button type="button" class="btn btn-danger fa fa-minus" onclick="downCtt()"></button>
+					@php
+						$sequence = 1;
+					@endphp
 					@foreach($client->contacts as $key => $ct)
 						<div id="formCtt1" class="form-group row" style="margin-bottom:10px;">
+							<input type="hidden" name="contacts[{{$key}}][cttId]" value="{{$sequence}}">
 							<div class="form-group col-md-3" id="cttName">
 								<label>Nome do Contato</label>
 								<input type="text" name="contacts[{{$key}}][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" value="{{ $ct->cttName }}" required>
@@ -54,13 +58,16 @@
 
 						@php
 							$lastVal = $key;
+							$sequence++;
 						@endphp
 					@endforeach
 						@php
-							$lastVal++
+							$lastVal++;
+							$more = $sequence++;
 						@endphp
 				</div>
 				<input type="hidden" id="last" value="{{ $lastVal }}"><br><br>
+				<input type="hidden" id="more" value="{{ $more }}"><br><br>
 
 			<h4 style="text-align:center;">Dados referente ao local de instalação</h4><br>
 
@@ -98,10 +105,10 @@
 				      <label for="month" style="font-weight:bolder">{{$mont->month}}</label>
 			      	  <input type="hidden" name="month[{{$key}}][month]" value="{{$mont->month}}">
 				      <select name="month[{{$key}}][payment]" class="form-control">
-				        <option selected value="1">Pendente</option>
-				        <option value="2">Pago via Pix</option>
-				        <option value="3">Pago via Boleto</option>
-				        <option value="4">Pago via Cartão Créd</option>
+				        <option value="1"{{ $client->payment[$key]->payment == 1 ? 'selected' : ''}}>Pendente</option>
+				        <option value="2"{{ $client->payment[$key]->payment == 2 ? 'selected' : ''}}>Pago via Pix</option>
+				        <option value="3"{{ $client->payment[$key]->payment == 3 ? 'selected' : ''}}>Pago via Boleto</option>
+				        <option value="4"{{ $client->payment[$key]->payment == 4 ? 'selected' : ''}}>Pago via Cartão Créd</option>
 				      </select>
 				    </div><br>
 				    <div class="form-group col-md-2">
@@ -144,8 +151,10 @@
 <script type="text/javascript">
 function moreCtt() {
 	var last = $('#last').val();
+	var more = $('#more').val();
 	var div = [];
 	div.push('<div id="formCtt' + last + '" class="form-group row" style="margin-top:15px;">');
+	div.push('<input type="hidden" name="contacts[' + last + '][cttId]" value="' + more + '">');
 	div.push('<div class="form-group col-md-3" id="cttName' + last + '">');
 	div.push('<label>Nome do Contato</label>');
 	div.push('<input type="text" name="contacts[' + last + '][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20">');
@@ -162,6 +171,7 @@ function moreCtt() {
 	div = div.join('');
 	$("#moreCtt").append(div);
 	$("#last").val(parseInt(last) + 1);
+	$("#more").val(parseInt(more) + 1);
 };
 
 

@@ -36,6 +36,7 @@
 					<button type="button" class="btn btn-success fa fa-plus" onclick="moreCtt()"></button>
 					<button type="button" class="btn btn-danger fa fa-minus" onclick="downCtt()"></button>
 					<div id="formCtt1" class="form-group row">
+					<input type="hidden" name="contacts[1][cttId]" value="1">
 						<div class="form-group col-md-3" id="cttName">
 							<label>Nome do Contato 1</label>
 							<input type="text" name="contacts[1][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20" value="{{ old('contacts[1][cttName]') }}" required>
@@ -136,6 +137,7 @@ function moreCtt() {
 	var last = $('#last').val();
 	var div = [];
 	div.push('<div id="formCtt' + last + '" class="form-group row" style="margin-top:15px;">');
+	div.push('<input type="hidden" name="contacts[' + last + '][cttId]" value="' + last + '">');
 	div.push('<div class="form-group col-md-3" id="cttName' + last + '">');
 	div.push('<label>Nome do Contato ' + last + '</label>');
 	div.push('<input type="text" name="contacts[' + last + '][cttName]" class="form-control" placeholder="Nome e sobrenome" maxlength="20">');

@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('client_id')->unsigned();
             $table->string('cttName');
+            $table->integer('cttId');
             $table->string('cttCel');
             $table->string('cttDesc');
             $table->timestamps();
