@@ -87,7 +87,6 @@
 			@endif
 		@endforeach
 
-		{{-- EXIBA UM SOMA DE TODOS OS VALORES QUE ESTAO COM ESTATUS PENDENTE --}}
 	  </div>
 	</div>
   </div>

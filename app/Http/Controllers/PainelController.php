@@ -12,7 +12,7 @@ use App\Models\PaymentControl;
 
 class PainelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $clients = Client::with('contacts', 'address', 'payment', 'extra')->orderBy('id', 'desc')->paginate(10);
         $data = [];
@@ -21,6 +21,17 @@ class PainelController extends Controller
         }
         $totVal = array_sum($data);
 
-        return view('painel.index')->with(compact('clients', 'totVal'));
+        $search = $request->all();
+        if ($search) {
+            $clients = Client::with('contacts', 'address', 'payment', 'extra')->where([
+                ['name', 'like', '%'.$search['name'].'%'],
+                ['accountNumber', 'like', '%'.$search['accountNumber'].'%'],
+                ['document', 'like', '%'.$search['document'].'%'],
+            ])->paginate(10);
+        } else{
+            $clients = Client::with('contacts', 'address', 'payment', 'extra')->orderBy('id', 'desc')->paginate(10);
+        }
+
+        return view('painel.index')->with(compact('clients', 'totVal', 'search'));
     }
 }

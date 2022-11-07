@@ -10,6 +10,9 @@
 		</div>
 		<div class="actions">
 			<div class="row justify-content-end">
+				<div class="col-sm-3" style="margin-right: -100px;">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filter" style="width:180px">Filtrar Busca</button>
+				</div>
 				<div class="col-sm-3">
 					<a href="{{ route('register-client') }}" type="button" class="btn btn-primary">Cadastrar novo cliente</a>
 				</div>
@@ -49,9 +52,8 @@
         </div>
 	</div>
 </div>
-<script>
-</script>
-		
+
+@include('painel.filter')
 @include('painel.style')
 
 @endsection

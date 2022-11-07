@@ -13,7 +13,7 @@
 			<div class="row">
 				<div class="form-group col-md-1">
 					<label>Nº Conta</label>
-					<input type="text" name="client[accountNumber]" class="form-control" maxlength="4" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ old('client[accountNumber]') }}" required>
+					<input type="text" name="client[accountNumber]" class="form-control" maxlength="5" placeholder="000" onkeyup="this.value=this.value.replace(/[^0-9]/g, '')" value="{{ old('client[accountNumber]') }}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Nome</label>
