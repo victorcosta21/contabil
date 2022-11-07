@@ -21,9 +21,10 @@
 		<table class="table mt-4">
 		  <tr>
 			<th width="5%">#</th>
-			<th width="25%">Nome</th>
-			<th width="25%">E-mail</th>
+			<th width="15%">Nome</th>
+			<th width="15%">E-mail</th>
 			<th width="15%">Documento</th>
+			<th width="10%">Inscrição</th>
 			<th width="15%"></th>
 		  </tr>
 
@@ -34,6 +35,7 @@
 			<td>{{ $client->name }}</td>
 			<td>{{ $client->email }}</td>
 			<td>{{ $client->document }}</td>
+			<td>{{ $client->date}}</td>
 			<td style="display: flex;">
 				<a href="{{ route('edit-client', ['id' => $client->id]) }}" class="fa fa-edit editBtn" type="button"></a> 
 				<button class="fa fa-address-card-o modalBtn" data-bs-toggle="modal" data-bs-target="#datailModal{{ $client->accountNumber }}" ></button>

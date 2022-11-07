@@ -22,14 +22,15 @@ class PainelController extends Controller
         $totVal = array_sum($data);
 
         $search = $request->all();
+        
         if ($search) {
             $clients = Client::with('contacts', 'address', 'payment', 'extra')->where([
                 ['name', 'like', '%'.$search['name'].'%'],
                 ['accountNumber', 'like', '%'.$search['accountNumber'].'%'],
                 ['document', 'like', '%'.$search['document'].'%'],
-            ])->paginate(10);
+            ])->orderBy('id', 'desc')->paginate(1);
         } else{
-            $clients = Client::with('contacts', 'address', 'payment', 'extra')->orderBy('id', 'desc')->paginate(10);
+            $clients = Client::with('contacts', 'address', 'payment', 'extra')->orderBy('id', 'desc')->paginate(1);
         }
 
         return view('painel.index')->with(compact('clients', 'totVal', 'search'));
