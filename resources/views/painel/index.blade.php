@@ -2,6 +2,17 @@
 
 @section('content')
 
+@php
+
+$filters = array();
+$filters = [
+	'name' => isset($_GET['filters']['name']) ? $_GET['filters']['name']: '',
+	'accountNumber' => isset($_GET['filters']['accountNumber']) ? $_GET['filters']['accountNumber']: '',
+	'document' => isset($_GET['filters']['document']) ? $_GET['filters']['document']: '',
+];
+
+@endphp
+
 <div class="box">
 	<div class="box-content">
 		<div class="panel">
@@ -50,7 +61,7 @@
 		@endforeach
 		</table>
       	<div class="pag" >
-          {{ $clients->links( "pagination::bootstrap-4") }}
+          {{ $clients->appends(request()->all())->links( "pagination::bootstrap-4") }}
         </div>
 	</div>
 </div>

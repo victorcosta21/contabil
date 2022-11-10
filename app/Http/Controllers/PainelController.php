@@ -21,18 +21,25 @@ class PainelController extends Controller
         }
         $totVal = array_sum($data);
 
-        $search = $request->all();
-        
-        if ($search) {
-            $clients = Client::with('contacts', 'address', 'payment', 'extra')->where([
-                ['name', 'like', '%'.$search['name'].'%'],
-                ['accountNumber', 'like', '%'.$search['accountNumber'].'%'],
-                ['document', 'like', '%'.$search['document'].'%'],
-            ])->orderBy('id', 'desc')->paginate(1);
-        } else{
-            $clients = Client::with('contacts', 'address', 'payment', 'extra')->orderBy('id', 'desc')->paginate(1);
-        }
+        $filters = $request->filters;
 
-        return view('painel.index')->with(compact('clients', 'totVal', 'search'));
+        $clients = Client::with('contacts', 'address', 'payment', 'extra');
+
+        if ($filters) {
+            if (isset($filters['name'])) {
+                $clients = $clients->where('name', 'like', '%'.$filters['name'].'%');
+            }
+
+            if (isset($filters['accountNumber'])) {
+                $clients = $clients->where('accountNumber', 'like', '%'.$filters['accountNumber'].'%');
+            }
+
+            if (isset($filters['document'])) {
+                $clients = $clients->where('document', 'like', '%'.$filters['document'].'%');
+            }
+        }
+        $clients = $clients->paginate(10);
+
+        return view('painel.index')->with(compact('clients', 'totVal', 'filters'));
     }
 }
