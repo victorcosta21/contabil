@@ -4,6 +4,7 @@
 
 <div class="box">
 	<div class="box-content">
+		<a href="{{ route('home') }}" class="btn btn-secondary fa fa-arrow-left" aria-hidden="true"> Voltar</a>
 
 		<h4 style="text-align:center;">Dados referente ao cliente</h4><br>
 		@include('register.alert')

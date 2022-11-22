@@ -1,7 +1,15 @@
 <style type="text/css">
+.fade{
+	position: absolute;
+	min-width: 100%;
+	min-height: 140%;
+	top: -12%;
+}
+
 .modal{
 	--bs-modal-width: 900px !important;
 	--bs-modal-height: 900px !important;
+	width: auto;
 }
 
 .modalLabel{
