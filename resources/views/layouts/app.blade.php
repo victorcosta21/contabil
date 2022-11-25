@@ -43,7 +43,7 @@
         <div class="l-navbar" id="nav-bar" style="background-color: #ffffff !important; border-right: solid; border-width: 2px;">
             <nav class="nav">
                 <div> 
-                    <a href="{{ route('home') }}" class="nav_logo"> 
+                    <a href="{{ route('management') }}" class="nav_logo"> 
                         <i class='bx bx-layer nav_logo-icon' style="color: black;"></i> 
                         <span class="nav_logo-name" style="color: black;">Contabil</span> 
                     </a>
@@ -56,7 +56,7 @@
                             <i class="fa fa-building nav_icon" aria-hidden="true"></i>
                             <span class="nav_name">Gestão</span> 
                         </a>
-                        <a href="{{ route('register-client') }}" class="nav_link" style="color: black;"> 
+                        <a href="{{ route('clients') }}" class="nav_link" style="color: black;"> 
                             <i class="fa fa-money nav_icon" aria-hidden="true"></i>
                             <span class="nav_name">Inadimplentes</span> 
                         </a>

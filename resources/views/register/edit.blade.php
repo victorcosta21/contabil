@@ -8,7 +8,7 @@
 		<h4 style="text-align:center;">Dados referente ao cliente</h4><br>
 		@include('register.alert')
 
-		<form class="form-group" action="{{ route('update', ['id' => $client->id]) }}" method="POST">
+		<form class="form-group" action="{{ route('update-client', ['id' => $client->id]) }}" method="POST">
 			@method('PUT')
 			@csrf
 			<div class="row">

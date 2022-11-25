@@ -8,6 +8,11 @@ class ManagementController extends Controller
 {
     public function index()
     {
-        return view('management/index');
+        return view('management.index');
+    }
+
+    public function create()
+    {
+        return view('management.create');
     }
 }

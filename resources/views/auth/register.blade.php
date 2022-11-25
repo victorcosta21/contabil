@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
 <style>
-.navbar{
+#nav-bar, #header{
     display: none;
 }
 </style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="margin-top:500px;">
                     <div>
                         <h2 class="login-title">Cadastrar</h2>
                     </div>

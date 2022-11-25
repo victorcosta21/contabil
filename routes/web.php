@@ -13,22 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
     Route::group(['middleware' => ['auth']], function() {
         /*Gestão*/
-        Route::get('home/management', [App\Http\Controllers\ManagementController::class, 'index'])->name('management');
+        Route::get('management', [App\Http\Controllers\ManagementController::class, 'index'])->name('management');
+        Route::get('management/register-spending', [App\Http\Controllers\ManagementController::class, 'create'])->name('register-spending');
 
         /*Inadimplentes*/
-        Route::get('home', [App\Http\Controllers\PainelController::class, 'index'])->name('home');
-        Route::get('home/register-client', [App\Http\Controllers\RegisterClient::class, 'index'])->name('register-client');
-        Route::post('/', [App\Http\Controllers\RegisterClient::class, 'store'])->name('store');
-        Route::get('home/{id}/edit-client', [App\Http\Controllers\RegisterClient::class, 'edit'])->name('edit-client');
-        Route::put('home/{id}/', [App\Http\Controllers\RegisterClient::class, 'update'])->name('update');
-        Route::delete('home/{id}/', [App\Http\Controllers\RegisterClient::class, 'destroy'])->name('delete-client');
+        Route::get('clients', [App\Http\Controllers\RegisterClient::class, 'index'])->name('clients');
+        Route::get('clients/register-client', [App\Http\Controllers\RegisterClient::class, 'create'])->name('register-client');
+        Route::post('/', [App\Http\Controllers\RegisterClient::class, 'store'])->name('store-client');
+        Route::get('clients/{id}/edit-client', [App\Http\Controllers\RegisterClient::class, 'edit'])->name('edit-client');
+        Route::put('clients/{id}/', [App\Http\Controllers\RegisterClient::class, 'update'])->name('update-client');
+        Route::delete('clients/{id}/', [App\Http\Controllers\RegisterClient::class, 'destroy'])->name('delete-client');
     });
 
 

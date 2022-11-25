@@ -34,6 +34,3 @@
 	color: black;
 }
 
-
-
-</style>
