@@ -36,7 +36,7 @@
             <i class='bx bx-menu' id="header-toggle"></i> 
         </div>
         <div class="header_img"> 
-            <img src="https://i.imgur.com/hczKIze.jpg" alt=""> 
+            <img src="{{ asset('images/efox.jpg') }}" alt="EFOX"> 
         </div>
     </header>
     <div id="app">
@@ -48,10 +48,6 @@
                         <span class="nav_logo-name" style="color: black;">Contabil</span> 
                     </a>
                     <div class="nav_list"> 
-                        <a href="#" class="nav_link" onclick="alert('Em Desenvolvimento!')" style="color: black;"> 
-                            <i class='bx bx-user nav_icon'></i> 
-                            <span class="nav_name">Usuários</span> 
-                        </a> 
                         <a href="{{ route('management') }}" class="nav_link" style="color: black;">
                             <i class="fa fa-building nav_icon" aria-hidden="true"></i>
                             <span class="nav_name">Gestão</span> 
@@ -64,6 +60,10 @@
                             <i class="fa fa-archive nav_icon" aria-hidden="true"></i>
                             <span class="nav_name">Estoque</span>
                         </a>
+                        <a href="#" class="nav_link" onclick="alert('Em Desenvolvimento!')" style="color: black;"> 
+                            <i class='bx bx-user nav_icon'></i> 
+                            <span class="nav_name">Usuários</span> 
+                        </a> 
                     </div>
                 </div> 
                 <a href="{{ route('logout') }}" class="nav_link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

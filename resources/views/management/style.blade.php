@@ -3,21 +3,16 @@
 .spending{
 	color: red;
 }
-.modalBtn{
+
+.editBtn, .deleteBtn {
+	margin-left: 15px;
 	font-size:30px;
 	background: none;
 	border: none;
 }
-.fade{
-	position: absolute;
-	min-width: 100%;
-	min-height: 140%;
-	top: -14%;
-}
-.modal{
-	--bs-modal-width: 900px !important;
-	--bs-modal-height: 900px !important;
-	width: auto;
+
+.editBtn{
+	color: black;
 }
 
 /*CREATE*/

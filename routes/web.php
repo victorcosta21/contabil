@@ -20,6 +20,10 @@ Auth::routes();
         /*Gestão*/
         Route::get('management', [App\Http\Controllers\ManagementController::class, 'index'])->name('management');
         Route::get('management/register-spending', [App\Http\Controllers\ManagementController::class, 'create'])->name('register-spending');
+        Route::post('management/store-spending', [App\Http\Controllers\ManagementController::class, 'store'])->name('store-spending');
+        Route::get('management/{id}/edit-spending', [App\Http\Controllers\ManagementController::class, 'edit'])->name('edit-spending');
+        Route::delete('management/{id}/', [App\Http\Controllers\ManagementController::class, 'destroy'])->name('delete-spending');
+        Route::put('management/{id}/', [App\Http\Controllers\ManagementController::class, 'update'])->name('update-spending');
 
         /*Inadimplentes*/
         Route::get('clients', [App\Http\Controllers\RegisterClient::class, 'index'])->name('clients');
